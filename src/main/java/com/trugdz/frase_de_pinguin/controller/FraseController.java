@@ -1,7 +1,7 @@
-package com.trugdz.frase_de_merda.controller;
+package com.trugdz.frase_de_pinguin.controller;
 
-import com.trugdz.frase_de_merda.model.Frase;
-import com.trugdz.frase_de_merda.service.FraseService;
+import com.trugdz.frase_de_pinguin.model.Frase;
+import com.trugdz.frase_de_pinguin.service.FraseService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

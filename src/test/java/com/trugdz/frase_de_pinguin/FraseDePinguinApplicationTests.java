@@ -1,10 +1,10 @@
-package com.trugdz.frase_de_merda;
+package com.trugdz.frase_de_pinguin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FraseDeMerdaApplicationTests {
+class FraseDePinguinApplicationTests {
 
 	@Test
 	void contextLoads() {

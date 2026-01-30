@@ -1,6 +1,6 @@
-package com.trugdz.frase_de_merda.repository;
+package com.trugdz.frase_de_pinguin.repository;
 
-import com.trugdz.frase_de_merda.model.Frase;
+import com.trugdz.frase_de_pinguin.model.Frase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

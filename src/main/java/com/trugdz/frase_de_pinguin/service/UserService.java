@@ -1,9 +1,9 @@
-package com.trugdz.frase_de_merda.service;
+package com.trugdz.frase_de_pinguin.service;
 
-import com.trugdz.frase_de_merda.model.Frase;
-import com.trugdz.frase_de_merda.model.User;
-import com.trugdz.frase_de_merda.repository.FraseRepository;
-import com.trugdz.frase_de_merda.repository.UserRepository;
+import com.trugdz.frase_de_pinguin.model.Frase;
+import com.trugdz.frase_de_pinguin.model.User;
+import com.trugdz.frase_de_pinguin.repository.FraseRepository;
+import com.trugdz.frase_de_pinguin.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

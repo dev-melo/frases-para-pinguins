@@ -1,4 +1,4 @@
-package com.trugdz.frase_de_merda.model;
+package com.trugdz.frase_de_pinguin.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "users_table")
