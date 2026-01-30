@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class FraseService {
     //Config inicial
-    private static final Long USUARIO_DELETADO_ID = 5L;
+    private static final Long USUARIO_DELETADO_ID = 12L;
 
     private final FraseRepository fraseRepository;
     private final UserRepository userRepository;
@@ -34,7 +34,7 @@ public class FraseService {
 
         String testaFrase = frase.getFrase();
         if(contemPalavraProibida(testaFrase)){
-            User permaBan = userRepository.findById(7L).orElseThrow();
+            User permaBan = userRepository.findById(13L).orElseThrow();
             frase.setUser(permaBan);
             String fraseUserOriginal = frase.getFrase();
             frase.setFrase("Usuario Original: " + user.getNickname() + " | Frase: " + fraseUserOriginal);

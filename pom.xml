@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.trugdz</groupId>
-	<artifactId>frase-de-merda</artifactId>
+	<artifactId>frase-de-pinguin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>frase-de-merda</name>
-	<description>Demo project for Spring Boot</description>
+	<name>frase-de-pinguin</name>
+	<description>Criando uma aplicação onde é possivel enviar uma frase para seu querido pinguin.</description>
 	<url/>
 	<licenses>
 		<license/>
