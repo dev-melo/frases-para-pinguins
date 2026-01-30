@@ -1,8 +1,12 @@
 spring:
+  config:
+    import: optional:file:.env[.properties]
+
+
   datasource:
     url: jdbc:postgresql://localhost:5432/appdb
-    username: devmelo
-    password: senha123
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:

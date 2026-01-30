@@ -1,4 +1,4 @@
-package com.trugdz.frase_de_pinguin.model;
+package com.trugdz.frase_de_pinguim.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

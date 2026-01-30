@@ -1,8 +1,8 @@
-package com.trugdz.frase_de_pinguin.controller;
+package com.trugdz.frase_de_pinguim.controller;
 
-import com.trugdz.frase_de_pinguin.model.Frase;
-import com.trugdz.frase_de_pinguin.model.User;
-import com.trugdz.frase_de_pinguin.service.UserService;
+import com.trugdz.frase_de_pinguim.model.Frase;
+import com.trugdz.frase_de_pinguim.model.User;
+import com.trugdz.frase_de_pinguim.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

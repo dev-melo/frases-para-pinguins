@@ -1,4 +1,4 @@
-package com.trugdz.frase_de_pinguin.model;
+package com.trugdz.frase_de_pinguim.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
