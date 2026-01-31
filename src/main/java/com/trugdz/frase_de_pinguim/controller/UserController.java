@@ -28,10 +28,7 @@ public class UserController {
     @GetMapping("/{id}")
     public UserDetailsResponseDTO getById(@PathVariable Long id){ return userService.getById(id); }
 
-    @GetMapping("/{userId}/frases")
-    public List<Frase> getByUserId(@PathVariable Long userId){
-        return userService.getFrasesByUser(userId);
-    }
+
 
     @PostMapping
     public UserResponseDTO create(@Valid @RequestBody CreateUserDTO request){ return userService.create(request); }

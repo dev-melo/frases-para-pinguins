@@ -31,7 +31,6 @@ public class UserService {
                 .toList();
     }
 
-    public List<Frase> getFrasesByUser(Long userId){return fraseRepository.findByUser_Id(userId);}
 
 
     public UserDetailsResponseDTO getById(Long id){

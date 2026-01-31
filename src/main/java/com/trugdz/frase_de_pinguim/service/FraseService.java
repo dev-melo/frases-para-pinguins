@@ -28,7 +28,13 @@ public class FraseService {
 
     //Metodos
     public List<Frase> getAll(){ return fraseRepository.findAll();}
+
+
     public Optional<Frase> getById(Long id){return fraseRepository.findById(id);}
+
+    public List<Frase> getFrasesByUser(Long userId){return fraseRepository.findByUser_Id(userId);}
+
+
     public Frase create(Frase frase, Long userId){
         User user = userRepository.findById(userId).orElseThrow();
 
