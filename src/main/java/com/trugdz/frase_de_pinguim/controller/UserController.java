@@ -1,8 +1,12 @@
 package com.trugdz.frase_de_pinguim.controller;
 
+import com.trugdz.frase_de_pinguim.dto.CreateUserDTO;
+import com.trugdz.frase_de_pinguim.dto.UserDetailsResponseDTO;
+import com.trugdz.frase_de_pinguim.dto.UserResponseDTO;
 import com.trugdz.frase_de_pinguim.model.Frase;
 import com.trugdz.frase_de_pinguim.model.User;
 import com.trugdz.frase_de_pinguim.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,10 +23,10 @@ public class UserController {
 
     //Rotas
     @GetMapping
-    public List<User> getAll(){ return userService.getAll(); }
+    public List<UserResponseDTO> getAll(){ return userService.getAll(); }
 
     @GetMapping("/{id}")
-    public Optional<User> getById(@PathVariable Long id){ return userService.getById(id); }
+    public UserDetailsResponseDTO getById(@PathVariable Long id){ return userService.getById(id); }
 
     @GetMapping("/{userId}/frases")
     public List<Frase> getByUserId(@PathVariable Long userId){
@@ -30,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody User user){ return userService.create(user); }
+    public UserResponseDTO create(@Valid @RequestBody CreateUserDTO request){ return userService.create(request); }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){ userService.delete(id);}

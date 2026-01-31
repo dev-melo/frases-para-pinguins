@@ -1,5 +1,6 @@
 package com.trugdz.frase_de_pinguim.service;
 
+import com.trugdz.frase_de_pinguim.dto.*;
 import com.trugdz.frase_de_pinguim.model.Frase;
 import com.trugdz.frase_de_pinguim.model.User;
 import com.trugdz.frase_de_pinguim.repository.FraseRepository;
@@ -21,13 +22,51 @@ public class UserService {
     }
 
     //Regras
-    public List<User> getAll(){return userRepository.findAll();}
+    public List<UserResponseDTO> getAll(){
+        return userRepository.findAll()
+                .stream()
+                .map(user -> new UserResponseDTO(
+                        user.getId(),
+                        user.getNickname()))
+                .toList();
+    }
+
     public List<Frase> getFrasesByUser(Long userId){return fraseRepository.findByUser_Id(userId);}
-    public Optional<User> getById(Long id){ return userRepository.findById(id);}
-    public User create(User user){
+
+
+    public UserDetailsResponseDTO getById(Long id){
+        Optional<User> userDetails = userRepository.findById(id);
+
+        if (userDetails.isEmpty()){
+            throw new RuntimeException("User not found");
+        }
+
+        User u = userDetails.get();
+
+
+
+        List<UserFraseResponseDTO> frasesDTO = u.getFrases()
+                .stream()
+                .map(frase -> new UserFraseResponseDTO(
+                        frase.getId(),
+                        frase.getDataCriacao(),
+                        frase.getDeslike(),
+                        frase.getFrase()
+                ))
+                .toList();
+
+        return new UserDetailsResponseDTO(u.getId(), u.getNickname(), u.getAtivo(), u.getDataCriacao(), frasesDTO);
+
+    }
+
+
+    public UserResponseDTO create(CreateUserDTO request){
+        User user = new User();
+        user.setNickname(request.nickname());
         user.setAtivo(true);
         user.setDataCriacao(LocalDate.now());
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        return new UserResponseDTO(savedUser.getId(), savedUser.getNickname());
     }
 
     public void delete(Long id) {
