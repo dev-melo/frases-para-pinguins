@@ -1,9 +1,10 @@
 package com.trugdz.frase_de_pinguim.service;
 
-import com.trugdz.frase_de_pinguim.dto.*;
-import com.trugdz.frase_de_pinguim.model.Frase;
+import com.trugdz.frase_de_pinguim.dto.CreateUserDTO;
+import com.trugdz.frase_de_pinguim.dto.UserDetailsResponseDTO;
+import com.trugdz.frase_de_pinguim.dto.UserFraseResponseDTO;
+import com.trugdz.frase_de_pinguim.dto.UserResponseDTO;
 import com.trugdz.frase_de_pinguim.model.User;
-import com.trugdz.frase_de_pinguim.repository.FraseRepository;
 import com.trugdz.frase_de_pinguim.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,9 @@ import java.util.Optional;
 public class UserService {
     //Config inicial
     private final UserRepository userRepository;
-    private final FraseRepository fraseRepository;
-    public UserService(UserRepository userRepository, FraseRepository fraseRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.fraseRepository = fraseRepository;
+
     }
 
     //Regras

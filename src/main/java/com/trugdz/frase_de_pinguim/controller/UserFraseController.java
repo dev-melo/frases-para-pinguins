@@ -1,9 +1,8 @@
 package com.trugdz.frase_de_pinguim.controller;
 
+import com.trugdz.frase_de_pinguim.dto.FraseResponseDTO;
 import com.trugdz.frase_de_pinguim.model.Frase;
 import com.trugdz.frase_de_pinguim.service.FraseService;
-import com.trugdz.frase_de_pinguim.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +21,7 @@ public class UserFraseController {
     }
 
     @GetMapping
-    public List<Frase> getByUserId(@PathVariable Long userId){
+    public List<FraseResponseDTO> getByUserId(@PathVariable Long userId){
         return fraseService.getFrasesByUser(userId);
     }
 

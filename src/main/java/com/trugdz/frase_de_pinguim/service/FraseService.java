@@ -1,5 +1,6 @@
 package com.trugdz.frase_de_pinguim.service;
 
+import com.trugdz.frase_de_pinguim.dto.FraseResponseDTO;
 import com.trugdz.frase_de_pinguim.model.Frase;
 import com.trugdz.frase_de_pinguim.model.User;
 import com.trugdz.frase_de_pinguim.repository.FraseRepository;
@@ -32,7 +33,30 @@ public class FraseService {
 
     public Optional<Frase> getById(Long id){return fraseRepository.findById(id);}
 
-    public List<Frase> getFrasesByUser(Long userId){return fraseRepository.findByUser_Id(userId);}
+    public List<FraseResponseDTO> getFrasesByUser(Long userId){
+        Optional<User> user = userRepository.findById(userId);
+
+        if(user.isEmpty()){
+            throw new RuntimeException("User not found");
+        }
+
+        User u = user.get();
+
+
+
+        List<FraseResponseDTO> frasesDTO = u.getFrases()
+                .stream()
+                .map(frase -> new FraseResponseDTO(
+                        frase.getId(),
+                        frase.getDataCriacao(),
+                        frase.getDeslike(),
+                        frase.getFrase(),
+                        frase.getUserId()
+                ))
+                .toList();
+
+        return frasesDTO;
+    }
 
 
     public Frase create(Frase frase, Long userId){
