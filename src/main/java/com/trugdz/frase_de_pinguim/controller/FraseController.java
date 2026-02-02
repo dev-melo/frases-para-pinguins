@@ -2,12 +2,10 @@ package com.trugdz.frase_de_pinguim.controller;
 
 import com.trugdz.frase_de_pinguim.dto.CreateFraseDTO;
 import com.trugdz.frase_de_pinguim.dto.FraseResponseDTO;
-import com.trugdz.frase_de_pinguim.model.Frase;
 import com.trugdz.frase_de_pinguim.service.FraseService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("frases")

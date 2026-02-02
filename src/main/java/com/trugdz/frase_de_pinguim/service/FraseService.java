@@ -87,7 +87,9 @@ public class FraseService {
 
     public FraseResponseDTO create(CreateFraseDTO request, Long userId){
         User user = userRepository.findById(userId).orElseThrow();
-
+        if (user.getAtivo() == false){
+            throw new RuntimeException("User disable, contact admin");
+        }
         String testaFrase = request.frase();
         Frase frase = new Frase();
         if(contemPalavraProibida(testaFrase)){
