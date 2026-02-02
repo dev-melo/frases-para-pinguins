@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.trugdz.frase_de_pinguim.dto.CreateUserDTO;
 import com.trugdz.frase_de_pinguim.dto.UserDetailsResponseDTO;
 import com.trugdz.frase_de_pinguim.dto.UserResponseDTO;
+import com.trugdz.frase_de_pinguim.dto.UserStatusDTO;
+import com.trugdz.frase_de_pinguim.model.Frase;
+import com.trugdz.frase_de_pinguim.model.User;
 import com.trugdz.frase_de_pinguim.service.UserService;
 
 import jakarta.validation.Valid;
@@ -33,6 +36,18 @@ public class UserController {
     @GetMapping("/{id}")
     public UserDetailsResponseDTO getById(@PathVariable Long id){ return userService.getById(id); }
 
+<<<<<<< HEAD
+=======
+    @PatchMapping("/{id}/active")
+    public UserStatusDTO activeUser(@PathVariable Long id){
+        return userService.activeUser(id);
+    }
+
+    @PatchMapping("/{id}/disable")
+    public UserStatusDTO disableUser(@PathVariable Long id){
+        return userService.disableUser(id);
+    }
+>>>>>>> origin/main
     @PostMapping
     public UserResponseDTO create(@Valid @RequestBody CreateUserDTO request){ return userService.create(request); }
 

@@ -1,5 +1,6 @@
 package com.trugdz.frase_de_pinguim.service;
 
+import com.trugdz.frase_de_pinguim.dto.CreateFraseDTO;
 import com.trugdz.frase_de_pinguim.dto.FraseResponseDTO;
 import com.trugdz.frase_de_pinguim.model.Frase;
 import com.trugdz.frase_de_pinguim.model.User;
@@ -24,14 +25,39 @@ public class FraseService {
     }
 
 
-
-
-
     //Metodos
-    public List<Frase> getAll(){ return fraseRepository.findAll();}
+    public List<FraseResponseDTO> getAll(){ return fraseRepository.findAll()
+            .stream()
+            .map(frase -> new FraseResponseDTO(
+                    frase.getId(),
+                    frase.getDataCriacao(),
+                    frase.getDeslike(),
+                    frase.getFrase(),
+                    frase.getUserId()
+            ))
+            .toList();}
 
 
-    public Optional<Frase> getById(Long id){return fraseRepository.findById(id);}
+    public FraseResponseDTO getById(Long id){
+        Optional<Frase> frasesById = fraseRepository.findById(id);
+
+        if (frasesById.isEmpty()){
+            throw new RuntimeException("Frase not found");
+        }
+
+        Frase frase = frasesById.get();
+
+
+
+        return new FraseResponseDTO(
+                frase.getId(),
+                frase.getDataCriacao(),
+                frase.getDeslike(),
+                frase.getFrase(),
+                frase.getUserId()
+        );
+
+    }
 
     public List<FraseResponseDTO> getFrasesByUser(Long userId){
         Optional<User> user = userRepository.findById(userId);
@@ -59,30 +85,49 @@ public class FraseService {
     }
 
 
-    public Frase create(Frase frase, Long userId){
+    public FraseResponseDTO create(CreateFraseDTO request, Long userId){
         User user = userRepository.findById(userId).orElseThrow();
-
-        String testaFrase = frase.getFrase();
+        if (user.getAtivo() == false){
+            throw new RuntimeException("User disable, contact admin");
+        }
+        String testaFrase = request.frase();
+        Frase frase = new Frase();
         if(contemPalavraProibida(testaFrase)){
+
+
             User permaBan = userRepository.findById(13L).orElseThrow();
             frase.setUser(permaBan);
-            String fraseUserOriginal = frase.getFrase();
+            String fraseUserOriginal = request.frase();
             frase.setFrase("Usuario Original: " + user.getNickname() + " | Frase: " + fraseUserOriginal);
 
         } else {
+            frase.setFrase(request.frase());
             frase.setUser(user);
        }
         frase.setDeslike(0);
         frase.setDataCriacao(LocalDate.now());
-
-        return fraseRepository.save(frase);
+        fraseRepository.save(frase);
+        return new FraseResponseDTO(
+                frase.getId(),
+                frase.getDataCriacao(),
+                frase.getDeslike(),
+                frase.getFrase(),
+                frase.getUserId()
+        );
     }
 
-    public Frase deslike(Long id){
+    public FraseResponseDTO deslike(Long id){
         Frase frase = fraseRepository.findById(id).orElseThrow();
-
         frase.setDeslike(frase.getDeslike() + 1);
-        return fraseRepository.save(frase);
+        fraseRepository.save(frase);
+
+        return new FraseResponseDTO(
+                frase.getId(),
+                frase.getDataCriacao(),
+                frase.getDeslike(),
+                frase.getFrase(),
+                frase.getUserId()
+        );
 
     }
 
@@ -94,7 +139,7 @@ public class FraseService {
     }
 
 
-    public Boolean contemPalavraProibida(String txt){
-        return txt.toLowerCase().trim().contains("buceta");
+    private Boolean contemPalavraProibida(String txt){
+        return txt.toLowerCase().trim().contains("qwert123456");
     }
 }

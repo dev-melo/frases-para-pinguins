@@ -1,11 +1,9 @@
 package com.trugdz.frase_de_pinguim.service;
 
-import com.trugdz.frase_de_pinguim.dto.CreateUserDTO;
-import com.trugdz.frase_de_pinguim.dto.UserDetailsResponseDTO;
-import com.trugdz.frase_de_pinguim.dto.UserFraseResponseDTO;
-import com.trugdz.frase_de_pinguim.dto.UserResponseDTO;
+import com.trugdz.frase_de_pinguim.dto.*;
 import com.trugdz.frase_de_pinguim.model.User;
 import com.trugdz.frase_de_pinguim.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -61,6 +59,7 @@ public class UserService {
 
     public UserResponseDTO create(CreateUserDTO request){
         User user = new User();
+
         user.setNickname(request.nickname());
         user.setAtivo(true);
         user.setDataCriacao(LocalDate.now());
@@ -73,5 +72,40 @@ public class UserService {
             throw new RuntimeException("User not found");
         }
         userRepository.deleteById(id);
+    }
+
+    public UserStatusDTO activeUser(@Valid Long id) {
+
+        if (!userRepository.existsById(id)){
+            throw new RuntimeException("User not found");
+        }
+
+        User userById = userRepository.findById(id).get();
+        userById.setAtivo(true);
+        userRepository.save(userById);
+
+
+        return new UserStatusDTO(
+                userById.getId(),
+                userById.getNickname(),
+                userById.getAtivo()
+        );
+    }
+    public UserStatusDTO disableUser(@Valid Long id) {
+
+        if (!userRepository.existsById(id)){
+            throw new RuntimeException("User not found");
+        }
+
+        User userById = userRepository.findById(id).get();
+        userById.setAtivo(false);
+        userRepository.save(userById);
+
+
+        return new UserStatusDTO(
+                userById.getId(),
+                userById.getNickname(),
+                userById.getAtivo()
+        );
     }
 }

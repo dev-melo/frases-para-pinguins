@@ -1,11 +1,11 @@
 package com.trugdz.frase_de_pinguim.controller;
 
-import com.trugdz.frase_de_pinguim.model.Frase;
+import com.trugdz.frase_de_pinguim.dto.CreateFraseDTO;
+import com.trugdz.frase_de_pinguim.dto.FraseResponseDTO;
 import com.trugdz.frase_de_pinguim.service.FraseService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("frases")
@@ -17,16 +17,19 @@ public class FraseController {
     }
 
     @GetMapping
-    public List<Frase> getAll(){return fraseService.getAll();}
+    public List<FraseResponseDTO> getAll(){return fraseService.getAll();}
 
     @GetMapping("{id}")
-    public Optional<Frase> getById(@PathVariable Long id){return fraseService.getById(id);}
+    public FraseResponseDTO getById(@PathVariable Long id){return fraseService.getById(id);}
 
     @PostMapping
-    public Frase create(@RequestBody Frase frase,@RequestParam Long userId){return fraseService.create(frase, userId);}
+    public FraseResponseDTO create(@RequestBody CreateFraseDTO request, @RequestParam Long userId){
+
+        return fraseService.create(request, userId);
+    }
 
     @PatchMapping("/{id}/deslike")
-    public Frase deslike(@PathVariable Long id){return fraseService.deslike(id);}
+    public FraseResponseDTO deslike(@PathVariable Long id){return fraseService.deslike(id);}
 
     @DeleteMapping("/{fraseId}")
     public void delete(@PathVariable Long fraseId){fraseService.delete(fraseId);}
