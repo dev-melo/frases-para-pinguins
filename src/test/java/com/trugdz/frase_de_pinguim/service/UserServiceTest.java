@@ -1,5 +1,6 @@
 package com.trugdz.frase_de_pinguim.service;
 
+import com.trugdz.frase_de_pinguim.dto.UserDetailsResponseDTO;
 import com.trugdz.frase_de_pinguim.dto.UserResponseDTO;
 import com.trugdz.frase_de_pinguim.model.User;
 import com.trugdz.frase_de_pinguim.repository.UserRepository;
@@ -11,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
@@ -68,6 +70,20 @@ class UserServiceTest {
 
     @Test
     void getByIdDataExists() {
+        User user1 = new User();
+        user1.setId(1L);
+        user1.setAtivo(true);
+        user1.setNickname("Ana");
+        user1.setFrases(List.of());
+
+        when(this.userRepository.findById(1L)).thenReturn(Optional.of(user1));
+
+        UserDetailsResponseDTO response = userService.getById(1L);
+
+        assertNotNull(response);
+        assertEquals("Ana", response.nickname());
+
+        verify(userRepository).findById(1L);
     }
     @Test
     void getByIdNoData() {
